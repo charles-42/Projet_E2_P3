@@ -1,0 +1,28 @@
+{% load static %}
+<!-- index.html -->
+<!DOCTYPE html>
+<html>
+<head>
+    <title>Car Price Prediction</title>
+    <link rel="stylesheet" type="text/css" href="{% static 'prediction/style.css' %}">
+</head>
+<body>
+    <h1>Car Price Prediction</h1>
+    <form method="POST" action="{% url 'prediction:predict' %}">
+        {% csrf_token %}
+        <label for="mileage">Mileage:</label>
+        <input type="text" name="mileage" required>
+        <br>
+        <label for="age">Age:</label>
+        <input type="text" name="age" required>
+        <br>
+        <input type="submit" value="Predict">
+    </form>
+    {% if prediction %}
+    <div class="prediction-result">
+        <h2>Prediction:</h2>
+        <p>{{ prediction }}</p>
+    </div>
+    {% endif %}
+</body>
+</html>
